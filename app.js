@@ -20,9 +20,10 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
+      "http://192.168.4.123:8081", //ises web
       "http://localhost:8081",//web de casa
       "http://192.168.100.134:8081",//celular
-      "http://192.168.100.95",//celular
+      "http://192.168.100.95",//celular 
     ],
     credentials: true,
   })
