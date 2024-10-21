@@ -4,7 +4,7 @@ import { Salud } from "./salud.js";
 import { Mascota } from "./mascota.js";
 import { Usuario } from "./usuarios.js";
 
-// Define las relaciones aquí
+// Relación Usuario - Dirección (uno a uno)
 Usuario.belongsTo(Direccion, {
   foreignKey: "idDireccion",
   as: "direccion",
@@ -12,16 +12,6 @@ Usuario.belongsTo(Direccion, {
 Direccion.hasOne(Usuario, {
   foreignKey: "idDireccion",
   as: "usuario",
-});
-
-// Relación Mascota - Salud (uno a uno)
-Mascota.belongsTo(Salud, {
-  foreignKey: "idSalud",
-  as: "salud",
-});
-Salud.hasOne(Mascota, {
-  foreignKey: "idSalud",
-  as: "mascota",
 });
 
 // Relación Usuario - Mascota (uno a muchos)
@@ -32,4 +22,14 @@ Usuario.hasMany(Mascota, {
 Mascota.belongsTo(Usuario, {
   foreignKey: "idUsuario",
   as: "usuario",
+});
+
+// Relación Mascota - Salud (uno a uno)
+Salud.belongsTo(Mascota, {
+  foreignKey: "idMascota",
+  as: "mascota",
+});
+Mascota.hasOne(Salud, {
+  foreignKey: "idMascota",
+  as: "salud",
 });
