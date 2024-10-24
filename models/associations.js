@@ -1,10 +1,11 @@
-import sequelize from "../utils/sequelize.js"; // Asegúrate de importar sequelize
+import sequelize from "../utils/sequelize.js";
 import { Direccion } from "./direccion.js";
 import { Salud } from "./salud.js";
 import { Mascota } from "./mascota.js";
 import { Usuario } from "./usuarios.js";
 
-// Relación Usuario - Dirección (uno a uno)
+console.log("Estamos sincronizando las tablas...");
+// Relación Usuario -  Dirección (uno a uno)
 Usuario.belongsTo(Direccion, {
   foreignKey: "idDireccion",
   as: "direccion",
@@ -25,11 +26,21 @@ Mascota.belongsTo(Usuario, {
 });
 
 // Relación Mascota - Salud (uno a uno)
-Salud.belongsTo(Mascota, {
-  foreignKey: "idMascota",
-  as: "mascota",
-});
 Mascota.hasOne(Salud, {
   foreignKey: "idMascota",
   as: "salud",
 });
+Salud.belongsTo(Mascota, {
+  foreignKey: "idMascota",
+  as: "mascota",
+});
+
+// Sincronización de los modelos en la base de datos
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log("Tablas sincronizadas correctamente ✅");
+  })
+  .catch((error) => {
+    console.error("Error al sincronizar las tablas ❌");
+  });
