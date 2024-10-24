@@ -1,5 +1,5 @@
 import { Mascota } from "../../models/mascota.js";
-
+import { Salud } from "../../models/salud.js";
 //controlador para obtener todas las mascotas
 
 export const getMascotas = async (req, res) => {
@@ -33,14 +33,24 @@ export const getMascotaById = async (req, res) => {
   }
 };
 
-//controlador para crear una mascota
-
 export const createMascota = async (req, res) => {
   try {
-    const { nombre, raza, descripcion, idSalud } = req.body;
-    const mascota = await Mascota.create({ nombre, raza, descripcion, idSalud });
+    const { idUsuario, nombre, raza, descripcion, alergias, edad, peso, castrado } = req.body;
+
+    // Crear un nuevo registro en la tabla Salud
+    const saludRecord = await Salud.create({ alergias, edad, peso, castrado });
+
+    // Usar el ID de Salud creado para la Mascota
+    const mascota = await Mascota.create({
+      idUsuario,
+      nombre,
+      raza,
+      descripcion,
+      idSalud: saludRecord.idSalud, 
+    });
+
     if (mascota) {
-      res.json(mascota);
+      res.status(201).json(mascota);
     } else {
       res.status(404).json({ message: "No se pudo crear la mascota" });
     }
@@ -49,6 +59,7 @@ export const createMascota = async (req, res) => {
     res.status(500).json({ message: "Error al crear la mascota" });
   }
 };
+
 
 //controlador para actualizar una mascota
 
