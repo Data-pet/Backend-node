@@ -42,5 +42,5 @@ sequelize
     console.log("Tablas sincronizadas correctamente ✅");
   })
   .catch((error) => {
-    console.error("Error al sincronizar las tablas ❌");
+    console.error("Error al sincronizar las tablas ❌",error);
   });
