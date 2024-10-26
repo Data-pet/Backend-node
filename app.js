@@ -26,7 +26,8 @@ app.use(
       "http://localhost:8081", //web de casa
       "http://192.168.100.134:8081", //celular
       "http://192.168.100.95:8081", //celular
-      "http://192.168.100.141:8081",
+      "http://192.168.4.28:8081",
+      
     ],
     credentials: true,
   })
