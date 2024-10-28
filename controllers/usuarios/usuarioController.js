@@ -155,7 +155,9 @@ export const updateUsuario = async (req, res) => {
 export const deleteUsuario = async (req, res) => {
   try {
     const { id } = req.params;
-    const usuario = await Usuario.destroy({ where: { id } });
+    const usuario = await Usuario.destroy({ where: { idUsuario: id } });
+    // se agrego el where para que sea posible eliminar en base al modelo registrado
+    // ver modelo del usuario
     if (usuario) {
       res.json(usuario);
     } else {

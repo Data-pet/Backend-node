@@ -7,6 +7,7 @@ export const Usuario = sequelize.define('Usuario', {
       primaryKey: true,
       autoIncrement: true,
     },
+  
     nombre: DataTypes.STRING,
     DNI: DataTypes.STRING,
     apellido: DataTypes.STRING,
