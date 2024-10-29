@@ -35,18 +35,55 @@ export const getMascotaById = async (req, res) => {
 
 export const createMascota = async (req, res) => {
   try {
-    const { idUsuario, nombre, raza, descripcion, alergias, edad, peso, castrado } = req.body;
-
-    // Crear un nuevo registro en la tabla Salud
-    const saludRecord = await Salud.create({ alergias, edad, peso, castrado });
-
-    // Usar el ID de Salud creado para la Mascota
-    const mascota = await Mascota.create({
+    const {
       idUsuario,
       nombre,
       raza,
       descripcion,
-      idSalud: saludRecord.idSalud, 
+      alergias,
+      edad,
+      peso,
+      castrado,
+      tipo,
+    } = req.body;
+
+    // Crear un nuevo registro en la tabla Salud
+    const saludRecord = await Salud.create({ alergias, edad, peso, castrado });
+    let imagen;
+    switch (tipo) {
+      case "Conejo":
+        imagen =
+          "https://res.cloudinary.com/dzemdgvqo/image/upload/v1730152603/ImusaIMGS/fq9voxoah14c7vwnsi60.png";
+        break;
+      case "Gato":
+        imagen =
+          "https://res.cloudinary.com/dzemdgvqo/image/upload/v1730152603/ImusaIMGS/wtzk7r9nkoccnykzxgtf.png";
+        break;
+      case "Pez":
+        imagen =
+          "https://res.cloudinary.com/dzemdgvqo/image/upload/v1730152603/ImusaIMGS/ixt4rlrgcrnhwprblou1.png";
+        break;
+      case "Perro":
+        imagen =
+          "https://res.cloudinary.com/dzemdgvqo/image/upload/v1730152603/ImusaIMGS/ir9angtjpy6iyezi328w.png";
+        break;
+      case "Ave":
+        imagen =
+          "https://res.cloudinary.com/dzemdgvqo/image/upload/v1730152602/ImusaIMGS/itenel7l60tyq68ik5w1.png";
+        break;
+      default:
+        imagen =
+          "https://res.cloudinary.com/dzemdgvqo/image/upload/v1730158093/ImusaIMGS/kiuwkug0b6a2cux3kvwr.png";
+        break;
+    }
+    // Usar el ID de Salud creado para la Mascota
+    const mascota = await Mascota.create({
+      imagen,
+      idUsuario,
+      nombre,
+      raza,
+      descripcion,
+      idSalud: saludRecord.idSalud,
     });
 
     if (mascota) {
@@ -59,7 +96,6 @@ export const createMascota = async (req, res) => {
     res.status(500).json({ message: "Error al crear la mascota" });
   }
 };
-
 
 //controlador para actualizar una mascota
 

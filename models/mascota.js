@@ -8,6 +8,7 @@ export const Mascota = sequelize.define('Mascota', {
     primaryKey: true,
     autoIncrement: true,
   },
+  imagen: DataTypes.STRING,
   nombre: DataTypes.STRING,
   raza: DataTypes.STRING,
   descripcion: DataTypes.TEXT,
