@@ -8,10 +8,10 @@ export const Usuario = sequelize.define('Usuario', {
       autoIncrement: true,
     },
   
-    nombre: DataTypes.STRING,
+    name: DataTypes.STRING,
     DNI: DataTypes.STRING,
     apellido: DataTypes.STRING,
-    contrasena: DataTypes.STRING,
+    password: DataTypes.STRING,
     correo: DataTypes.STRING,
     tipoUsuario: DataTypes.STRING,
     telefono: DataTypes.STRING,

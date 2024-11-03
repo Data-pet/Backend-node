@@ -10,9 +10,9 @@ export const LoginUsuario = async (req, res) => {
 
     if (usuario) {
       // Verificar si la contraseña coincide
-      if (usuario.contrasena === password) {
+      if (usuario.password === password) {
         // Retornar el usuario encontrado sin incluir la contraseña
-        const { contrasena, ...usuarioSinContrasena } = usuario.dataValues;
+        const { password, ...usuarioSinContrasena } = usuario.dataValues;
         res.json(usuarioSinContrasena);
       } else {
         res.status(401).json({ message: "Contraseña incorrecta" });
@@ -64,10 +64,10 @@ export const createUsuario = async (req, res) => {
   const transaction = await sequelize.transaction(); // Inicia una transacción
   try {
     const {
-      nombre,
+      name,
       DNI,
       apellido,
-      contrasena,
+      password,
       correo,
       tipoUsuario,
       telefono,
@@ -85,10 +85,10 @@ export const createUsuario = async (req, res) => {
     // Luego crea el usuario y asocia la dirección
     const usuario = await Usuario.create(
       {
-        nombre,
+        name,
         DNI,
         apellido,
-        contrasena,
+        password,
         correo,
         tipoUsuario,
         telefono,
@@ -117,10 +117,10 @@ export const updateUsuario = async (req, res) => {
   try {
     const { id } = req.params;
     const {
-      nombre,
+      name,
       DNI,
       apellido,
-      contrasena,
+      password,
       correo,
       tipoUsuario,
       telefono,
@@ -128,10 +128,10 @@ export const updateUsuario = async (req, res) => {
     } = req.body;
     const usuario = await Usuario.update(
       {
-        nombre,
+        name,
         DNI,
         apellido,
-        contrasena,
+        password,
         correo,
         tipoUsuario,
         telefono,
