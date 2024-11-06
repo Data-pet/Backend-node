@@ -5,8 +5,19 @@ import sequelize from "../../utils/sequelize.js";
 
 export const LoginUsuario = async (req, res) => {
   try {
-    const { email, password } = req.body; 
-    const usuario = await Usuario.findOne({ where: { correo: email } });
+    const { email, password } = req.body;
+
+    // Busca al usuario y su dirección relacionada
+    const usuario = await Usuario.findOne({
+      where: { correo: email },
+      include: [
+        {
+          model: Direccion,
+          as: "direccion",
+          attributes: { exclude: ["usuarioId"] },
+        },
+      ],
+    });
 
     if (usuario) {
       // Verificar si la contraseña coincide
@@ -25,7 +36,6 @@ export const LoginUsuario = async (req, res) => {
     res.status(500).json({ message: "Error al obtener el usuario" });
   }
 };
-
 
 export const getUsuarios = async (req, res) => {
   try {
