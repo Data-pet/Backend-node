@@ -11,6 +11,7 @@ export const Mascota = sequelize.define('Mascota', {
   imagen: DataTypes.STRING,
   nombre: DataTypes.STRING,
   raza: DataTypes.STRING,
+  tipo:DataTypes.STRING,
   descripcion: DataTypes.TEXT,
   idSalud: {
     type: DataTypes.INTEGER,

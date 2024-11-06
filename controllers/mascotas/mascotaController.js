@@ -81,6 +81,7 @@ export const createMascota = async (req, res) => {
       imagen,
       idUsuario,
       nombre,
+      tipo,
       raza,
       descripcion,
       idSalud: saludRecord.idSalud,
