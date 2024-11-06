@@ -140,7 +140,8 @@ export const updateMascota = async (req, res) => {
 export const deleteMascota = async (req, res) => {
   try {
     const { id } = req.params;
-    const mascota = await Mascota.destroy({ where: { id } });
+    const mascota = await Mascota.destroy({ where: { idMascota:id } });
+    
     if (mascota) {
       res.json(mascota);
     } else {
