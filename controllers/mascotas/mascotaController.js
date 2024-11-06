@@ -1,5 +1,7 @@
 import { Mascota } from "../../models/mascota.js";
 import { Salud } from "../../models/salud.js";
+
+
 //controlador para obtener todas las mascotas
 
 export const getMascotas = async (req, res) => {
@@ -99,6 +101,9 @@ export const createMascota = async (req, res) => {
       idUsuario,
       nombre,
       tipo,
+      edad,
+      peso,
+      alergias,
       raza,
       descripcion,
       idSalud: saludRecord.idSalud,
