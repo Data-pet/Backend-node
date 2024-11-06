@@ -16,6 +16,23 @@ export const getMascotas = async (req, res) => {
   }
 };
 
+//consultar mascotas por idUsuario
+export const getMascotasUsuario = async (req, res) => {
+  try {
+    const { idUsuario } = req.params;
+    const mascotas = await Mascota.findAll({
+      where: { idUsuario },
+    });
+    if (mascotas) {
+      res.json(mascotas);
+    } else {
+      res.status(404).json({ message: "No se encontraron mascotas" });
+    }
+  } catch (error) {
+    console.error("Error al obtener las mascotas:", error);
+    res.status(500).json({ message: "Error al obtener las mascotas" });
+  }
+};
 //controlador para obtener una mascota por ID
 
 export const getMascotaById = async (req, res) => {
