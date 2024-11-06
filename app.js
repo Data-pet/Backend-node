@@ -17,7 +17,7 @@ const app = express();
 
 // Middleware para parsear los datos entrantes en formato JSON
 app.use(express.json());
-
+ 
 // Middleware para habilitar la comunicación entre servidores (CORS)
 app.use(
   cors({
